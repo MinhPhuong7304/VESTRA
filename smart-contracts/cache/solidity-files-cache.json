@@ -1,0 +1,41 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "D:\\Dự án VTOShop\\VESTRA\\smart-contracts\\contracts\\VestraLedger.sol": {
+      "lastModificationDate": 1781713808628,
+      "contentHash": "0c29c51d55d4da632294a09ac992c5eb",
+      "sourceName": "contracts/VestraLedger.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "VestraLedger"
+      ]
+    }
+  }
+}
