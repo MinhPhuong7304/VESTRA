@@ -83,6 +83,7 @@ const getAllProducts = async (req, res, next) => {
     const where = {};
     if (req.query.status) where.status = String(req.query.status);
     if (req.query.store_id) where.store_id = String(req.query.store_id);
+    if (req.query.owner_id) where.owner_id = String(req.query.owner_id);
     if (req.query.is_pass_item !== undefined) {
       where.is_pass_item = req.query.is_pass_item === 'true';
     }
