@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -7,6 +8,15 @@ require("dotenv").config();
 const authRoutes = require('./routes/authRoutes');
 const tryOnRoutes = require('./routes/tryOnRoutes');
 const threeDRoutes = require('./routes/threeDRoutes');
+const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const addressRoutes = require('./routes/addressRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+const chatRoutes = require('./routes/chatRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
+const createResourceRouter = require('./routes/resourceRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -56,6 +66,55 @@ app.use("/", tryOnRoutes);
 
 app.use("/api", threeDRoutes);
 app.use("/", threeDRoutes);
+
+// Sản phẩm & Danh mục
+app.use("/api/products", productRoutes);
+app.use("/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/categories", categoryRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/upload", uploadRoutes);
+
+// Đơn hàng & Giỏ hàng
+app.use("/api/orders", orderRoutes);
+app.use("/orders", orderRoutes);
+app.use("/api/carts", cartRoutes);
+app.use("/carts", cartRoutes);
+
+// Người dùng, Địa chỉ & Thông báo
+app.use("/api/addresses", addressRoutes);
+app.use("/addresses", addressRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/notifications", notificationRoutes);
+
+// Chatbot AI
+app.use("/api", chatRoutes);
+app.use("/", chatRoutes);
+
+// Tài nguyên CRUD động (Dynamic Resource Routes)
+app.use("/api/users", createResourceRouter("users"));
+app.use("/users", createResourceRouter("users"));
+
+app.use("/api/banners", createResourceRouter("banners"));
+app.use("/banners", createResourceRouter("banners"));
+
+app.use("/api/vouchers", createResourceRouter("vouchers"));
+app.use("/vouchers", createResourceRouter("vouchers"));
+
+app.use("/api/stores", createResourceRouter("stores"));
+app.use("/stores", createResourceRouter("stores"));
+
+app.use("/api/shifts", createResourceRouter("shifts"));
+app.use("/shifts", createResourceRouter("shifts"));
+
+app.use("/api/chats", createResourceRouter("chats"));
+app.use("/chats", createResourceRouter("chats"));
+
+app.use("/api/chat-messages", createResourceRouter("chat_messages"));
+app.use("/chat-messages", createResourceRouter("chat_messages"));
+
+app.use("/api/reviews", createResourceRouter("reviews"));
+app.use("/reviews", createResourceRouter("reviews"));
 
 app.get('/', (req, res) => {
   res.send('Server Backend Vestra TMĐT & Blockchain Ledger đang chạy (JWT + WebSocket Enabled)');

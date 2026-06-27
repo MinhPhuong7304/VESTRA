@@ -54,6 +54,7 @@ model Store {
   staff          User[]   @relation("StoreStaff")
   products       Product[]
   orders         Order[]
+  vouchers       Voucher[]
 }
 
 model Address {
@@ -159,6 +160,8 @@ model Voucher {
   created_at     DateTime @default(now())
 
   orders         Order[]
+  store_id       String?
+  store          Store?   @relation(fields: [store_id], references: [id], onDelete: SetNull)
 }
 
 model Shift {
