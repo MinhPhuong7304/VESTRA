@@ -4,7 +4,13 @@ const prisma = require('../config/prisma');
 
 router.get('/', async (req, res, next) => {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({
+      include: {
+        _count: {
+          select: { products: true }
+        }
+      }
+    });
     res.json(categories);
   } catch (error) {
     next(error);
@@ -13,7 +19,14 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const category = await prisma.category.findUnique({ where: { id: String(req.params.id) } });
+    const category = await prisma.category.findUnique({ 
+      where: { id: String(req.params.id) },
+      include: {
+        _count: {
+          select: { products: true }
+        }
+      }
+    });
     if (!category) return res.status(404).json({ error: "Không tìm thấy danh mục" });
     res.json(category);
   } catch (error) {
